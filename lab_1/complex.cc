@@ -57,7 +57,7 @@ public:
             cout << "No Data" << endl;
             return;
         }
-        if (real)
+        else if (real)
         {
             cout << real;
         }
