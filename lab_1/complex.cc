@@ -10,6 +10,17 @@ private:
     int imag;
 
 public:
+    Complex(){
+        this->real = 0;
+        this->imag = 0;
+    }
+    Complex(int real, int imag){
+        this->real;
+        this->imag;
+    }
+    ~Complex(){
+        cout << "Complex Destructed";
+    }
     void setReal(int value)
     {
         real = value;
