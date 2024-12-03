@@ -114,6 +114,7 @@ typedef enum
     Insert,
     AltBackSpace,
     Delete,
+    Unknown,
 
 } KeyboardButton;
 
@@ -139,8 +140,9 @@ KeyboardButton captureKeyboardInput()
     case Enter:
         return Enter;
     case KeySpace ... KeyTilde:
-        return first;
+        return (KeyboardButton)first;
     case KEY_ESC_OR_EXTENDED:
+    {
         if (kbhit() == 0)
             return Escape;
         char middle = getch();
@@ -173,7 +175,10 @@ KeyboardButton captureKeyboardInput()
             return AltBackSpace;
         }
         break;
+    }
+
     case Backspace:
         return Backspace;
     }
+    return Unknown;
 }
