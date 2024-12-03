@@ -18,7 +18,7 @@ public:
     {
         imag = value;
     }
-    void setAll(int rVal, int iVal)
+    void setComplex(int rVal, int iVal)
     {
         real = rVal;
         imag = iVal;
@@ -36,7 +36,7 @@ public:
     Complex add(Complex &rightOp)
     {
         Complex result;
-        result.setAll(
+        result.setComplex(
             real + rightOp.real,
             imag + rightOp.imag);
         return result;
@@ -44,7 +44,7 @@ public:
     Complex sub(Complex &rightOp)
     {
         Complex result;
-        result.setAll(
+        result.setComplex(
             real - rightOp.real,
             imag - rightOp.imag);
         return result;
@@ -73,18 +73,18 @@ public:
 int main()
 {
     Complex num_1;
-    num_1.setAll(13, 0);
+    num_1.setComplex(13, 0);
     // real only
     num_1.display();
 
     Complex num_2;
-    num_2.setAll(0, -49);
+    num_2.setComplex(0, -49);
     //imag only
     num_2.display();
 
 
     Complex num_3;
-    num_3.setAll(0, 0);
+    num_3.setComplex(0, 0);
     // 0 0 case
     num_3.display();
 
