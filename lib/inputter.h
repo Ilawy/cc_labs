@@ -18,6 +18,8 @@ int prompt_int(char *message)
     int done = 0;
     while (!done)
     {
+        // printf("\n---\n%d %d %d\n---\n", index, index + 1, MAX_INT_SLOTS);
+        int x = 0, y = 0;
         char hit = getch();
         switch (hit)
         {
@@ -33,9 +35,11 @@ int prompt_int(char *message)
             if (index > 0)
             {
                 printf("\b ");
-                gotox(wherex() - 1);
+                wherexy(&x, &y);
+                gotox(x - 1);
                 buffer[index] = 0;
                 index--;
+                // system("sleep 0.0680");
             }
             break;
         case ENTER_KEY:

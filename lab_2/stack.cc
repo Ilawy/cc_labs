@@ -175,7 +175,7 @@ void main_push_click(Master *state)
     } while (salary == 0);
     cout << endl;
     Employee employee = Employee(name, salary);
-    delete name; //TODO check this
+    delete name; // TODO check this
     try
     {
         state->stack->push(employee);
@@ -244,7 +244,6 @@ int main()
 {
     int size = 0;
     bool done_before = false;
-
     do
     {
         if (done_before)
@@ -256,8 +255,6 @@ int main()
 
     Stack *stack = new Stack(size);
     Master state(stack, NULL);
-
-  
 
     MenuItem<Master> main_items[] = {
         MenuItem<Master>("Push", &main_push_click, &noop),
@@ -271,5 +268,5 @@ int main()
     state.menu = &main_menu;
     main_menu.render();
 
-    delete stack; //TODO check this
+    delete stack; // TODO check this
 }
