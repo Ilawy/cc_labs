@@ -96,8 +96,9 @@ namespace strutil
                 String  =   String  (done)
                 String  +=  String  (done)
         Methods
-            .length (planned)
+            .length (done)
             .slice  (planned)
+            .codeAt	(planned)
 */
 
 class String
@@ -129,7 +130,7 @@ public:
 
     String(String &copied)
     {
-        cout << "COPE" << endl;
+        //cout << "COPE" << endl;
         this->size = copied.size;
         this->pointer = new char[this->size];
         strutil::strcpy(this->pointer, copied.pointer);
