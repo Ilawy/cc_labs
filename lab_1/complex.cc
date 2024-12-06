@@ -10,17 +10,34 @@ private:
     int imag;
 
 public:
-    Complex(){
+    Complex()
+    {
         this->real = 0;
         this->imag = 0;
     }
-    Complex(int real, int imag){
+    Complex(int real, int imag)
+    {
         this->real;
         this->imag;
     }
-    ~Complex(){
-        cout << "Complex Destructed";
+    Complex(Complex &original)
+    {
+        this->real = original.real;
+        this->imag = original.imag;
     }
+    ~Complex()
+    {
+        cout << "Complex Destructed" << endl;
+    }
+
+
+    Complex& operator+(Complex& right){
+        Complex *final = new Complex;
+        final->real = this->real + right.real;
+        final->imag = this->imag + right.imag;
+        return *final;
+    }
+
     void setReal(int value)
     {
         real = value;
@@ -75,11 +92,14 @@ public:
         if (imag != 0)
         {
             cout << ((imag > 0) ? "+" : "") << imag << "j";
-           
         }
         cout << endl;
     }
 };
+
+void display(Complex &c){
+    c.display();
+}
 
 int main()
 {
@@ -90,21 +110,16 @@ int main()
 
     Complex num_2;
     num_2.setComplex(0, -49);
-    //imag only
+    // imag only
     num_2.display();
-
 
     Complex num_3;
     num_3.setComplex(0, 0);
     // 0 0 case
     num_3.display();
 
-
-    Complex result = num_1.add(num_2);
-    //full case negative
-    result.display();
-
-    result.setImag(12);
-    //full case positive
-    result.display();
+    Complex result = num_1 + num_2 /* num_1.add(num_2) */;
+    // full case negative
+    // result.display();
+    display(result);
 }
