@@ -13,14 +13,18 @@ enum StackError
         size = grower
         items = T[grower]
 
+    grow
+        size += grower
+        (realloc)
+    
+    shrink
+        size -= grower
+        (realloc)
     push
         if top >= size (FULL)
-            size += grower
-            items[top] = item
-            top++
-        else (HAVE SPACE)
-            items[top] = item
-            top++
+            grow()
+        items[top] = item
+        top++
 
     pop
         if top <= size
@@ -28,7 +32,8 @@ enum StackError
         else
             top--
             cuurent = items[top]
-            if(top % grower == 0)size -= grower
+            if(top % grower == 0)
+                shrink()
             return current
 
 */
@@ -43,8 +48,6 @@ private:
     T *items;
     void grow()
     {
-        cout << "GROW ~ old = " << this->size << " new = " << this->size + this->grower << endl;
-
         this->size += this->grower;
         T *new_ptr = new T[this->size];
         for (int i = 0; i < this->size; i++)
@@ -56,7 +59,6 @@ private:
     }
     void shrink()
     {
-        cout << "SHRINK ~ old = " << this->size << " new = " << this->size - this->grower << endl;
         this->size -= this->grower;
         T *new_ptr = new T[this->size];
         for (int i = 0; i < this->size; i++)
