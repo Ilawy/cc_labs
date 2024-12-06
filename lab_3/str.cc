@@ -1,5 +1,5 @@
 #include <iostream>
-#include "str.h"
+#include "str.hh"
 using namespace std;
 
 int main()
@@ -7,9 +7,8 @@ int main()
     String sample_1 = "Mohammed";
     // String sample_2 = "Amr";
     sample_1 += " ";
-    sample_1 += "Amr";
+    sample_1 += "Amr ";
     cout << sample_1 << endl;
-    sample_1.inspect();
     // char sample_3[] = "Mohammed Ali";
     // // Comparison
     // cout << "COMPARISON" << endl;

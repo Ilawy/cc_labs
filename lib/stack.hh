@@ -8,7 +8,7 @@ template <typename T>
 class Stack{
     private:
         int size;
-        int top;
+        int top = 0;
         T* items;
     public:
         Stack(int size){
