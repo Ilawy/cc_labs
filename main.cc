@@ -5,14 +5,12 @@
 using namespace std;
 
 int main(){
-    FlexStack<String> list(1024);
-    for(int i = 0; i < 1900; i++){
-        String result = "Mohammed ";
-        // result += i;
-        list.push(result + i);
+    FlexStack<int> list(8);
+    for(int i = 0; i < 10; i++){
+        list.push(i);
     }
     cout << "SIZE BEFORE = " << list.getSize() << endl;
-    for(int i = 0; i < 1900; i++){
+    for(int i = 0; i < 6; i++){
         list.pop();
     }
   

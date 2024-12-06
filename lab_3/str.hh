@@ -118,7 +118,7 @@ private:
 public:
     String()
     {
-        this->size = 0;
+        this->size = 1;
         this->pointer = new char[1];
         this->pointer[0] = '\0';
     }
@@ -132,7 +132,7 @@ public:
 
     String(String &copied)
     {
-        //cout << "COPE" << endl;
+        // cout << "COPE" << endl;
         this->size = copied.size;
         this->pointer = new char[this->size];
         strutil::strcpy(this->pointer, copied.pointer);

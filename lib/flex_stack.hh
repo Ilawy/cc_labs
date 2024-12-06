@@ -49,11 +49,14 @@ private:
     void grow()
     {
         this->size += this->grower;
+        cout << "GROW :: " << this->size << endl;
         T *new_ptr = new T[this->size];
+
         for (int i = 0; i < this->size; i++)
         {
             new_ptr[i] = this->items[i];
         }
+        cout << "GROW :: " << this->size << endl;
         delete[] this->items;
         this->items = new_ptr;
     }
