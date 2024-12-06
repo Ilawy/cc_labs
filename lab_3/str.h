@@ -43,6 +43,8 @@ namespace strutil
 
 }
 
+
+
 // class String
 // {
 // private:
@@ -138,7 +140,7 @@ public:
 
     ~String()
     {
-        delete this->pointer;
+        delete [] this->pointer;
     }
 
     //
@@ -166,7 +168,7 @@ public:
         new_pointer[new_size] = '\0';
         this->pointer = new_pointer;
         this->size = new_size;
-        delete old;
+        delete [] old;
     }
     void operator+=(String &right)
     {
@@ -178,12 +180,12 @@ public:
         new_pointer[new_size] = '\0';
         this->pointer = new_pointer;
         this->size = new_size;
-        delete old;
+        delete [] old;
     }
 
     void operator=(const String &right)
     {
-        delete this->pointer;
+        delete [] this->pointer;
         this->pointer = new char[right.size];
         strutil::strcpy(this->pointer, right.pointer);
     }
@@ -257,7 +259,10 @@ public:
 
     friend std::ostream &operator<<(std::ostream &o, String t)
     {
-        o << t.pointer;
+        // o << t.pointer;
+        for(int i = 0; i < t.size; i++){
+            o << t.pointer[i];
+        }
         return o;
     }
 };
