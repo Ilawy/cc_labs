@@ -1,4 +1,3 @@
-
 enum StackError{
     StackIsFull,
     StackIsEmpty

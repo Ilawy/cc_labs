@@ -155,7 +155,9 @@ public:
         strutil::cpyat(result, 0, this->pointer);
         strutil::cpyat(final->pointer, this->size, right.pointer);
         final->pointer[this->size + right.size] = '\0';
-
+        //? why there's no delete here?
+        //? you're creating new string here, nothing should be deallocated
+        //
         return *final;
     }
     void operator+=(char right[])
@@ -186,6 +188,7 @@ public:
     void operator=(const String &right)
     {
         delete [] this->pointer;
+        this->size = right.size;
         this->pointer = new char[right.size];
         strutil::strcpy(this->pointer, right.pointer);
     }

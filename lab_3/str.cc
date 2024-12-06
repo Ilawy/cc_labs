@@ -27,5 +27,11 @@ int main()
     cout << "(String <= String) = " << ((sample_1 <= sample_2)) << endl;
     cout << "(String <= String) = " << ((sample_1 <= sample_3)) << endl;
 
+    //reassigning
+    String sx = "Hello";
+    sx = "world";
+    cout << sx << endl;
+
+
     return 0;
 }
