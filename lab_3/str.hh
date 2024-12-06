@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 namespace strutil
 {
@@ -93,6 +94,13 @@ namespace strutil
                 String  ==  String  (planned)
                 String  ==  char[]  (planned)
                 char[]  ==  String  (planned)
+        Misc
+            ADD
+                String  +   String  (done)
+                String  +   char[]  (done)
+                char[]  +   String  (planned)
+                String  +   int     (done)
+                int     +   String  (planned)
         Assigning
             =
                 String  =   String  (done)
@@ -111,6 +119,11 @@ private:
 
     static String from(char str[], int size)
     {
+        String *result = new String;
+        result->size = size;
+        result->pointer = new char[size];
+        strutil::strcpy(result->pointer, str);
+        return *result;
     }
     int size;
     char *pointer;
@@ -143,7 +156,7 @@ public:
         delete [] this->pointer;
     }
 
-    //
+    //ADD
     String &operator+(String &right)
     {
         int result_size = this->size + right.size;
@@ -160,6 +173,17 @@ public:
         //
         return *final;
     }
+    String &operator +(int right_int){
+        // https://stackoverflow.com/a/8257728
+        int right_size = (int)((ceil(log10(right_int))+1)*sizeof(char));
+        char *right_pointer = new char[right_size];
+        sprintf(right_pointer, "%d", right_int);
+        String right_string = String::from(right_pointer, right_size);
+        return this->operator+(right_string);
+    }
+
+
+
     void operator+=(char right[])
     {
         char *old = this->pointer;

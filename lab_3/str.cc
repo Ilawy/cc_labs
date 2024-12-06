@@ -28,9 +28,8 @@ int main()
     cout << "(String <= String) = " << ((sample_1 <= sample_3)) << endl;
 
     //reassigning
-    String sx = "Hello";
-    sx = "world";
-    cout << sx << endl;
+    String sx = "My age is: ";
+    cout << sx + 24 << endl;
 
 
     return 0;
