@@ -1,5 +1,5 @@
 
-.SILENT: lab1 lab2 lab4
+.SILENT: lab1 lab2 lab4 lab5
 lab1:
 	echo "=====" complex "====="
 	cd lab_1 && g++ complex.cc -o main && ./main
@@ -16,3 +16,9 @@ lab3:
 lab4:
 	echo "=====" graphics "====="
 	cd lab_4 && g++ -o main main.cc -lSDL_bgi -lSDL2 && ./main
+
+lab5:
+	echo "=====" graphics "(colored)" "====="
+	cd lab_5 && g++ -o main draw.cc -lSDL_bgi -lSDL2 && ./main
+	echo "=====" class inheritance "====="
+	cd lab_5 && g++ -o main inherit.cc && ./main

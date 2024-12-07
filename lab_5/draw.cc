@@ -170,7 +170,8 @@ int main()
     int x, y;
 
     Picture myPic;
-
+    Text t0 = Text("press any key to exit", 30, 420, RED);
+    t0.setFontSize(3);
     Text t1 = Text("Hello", 30, 120, YELLOW);
     Text t2 = Text("World", 30, 180, CYAN);
     t1.setFontSize(5);
@@ -179,13 +180,13 @@ int main()
     Circle cArr[3] = {Circle(50, 50, 50, RED), Circle(200, 100, 100, RED), Circle(420, 50, 30, RED)};
     Rect rArr[2] = {Rect(30, 40, 170, 100, GREEN), Rect(420, 50, 500, 300, GREEN)};
     Line lArr[2] = {Line(420, 50, 300, 300, BLUE), Line(40, 500, 500, 400, BLUE)};
-    Text tArr[2] = {t1, t2};
+    Text tArr[3] = {t0, t1, t2};
 
 
     myPic.setCircles(3, cArr);
     myPic.setRects(2, rArr);
     myPic.setLines(2, lArr);
-    myPic.setTexts(2, tArr);
+    myPic.setTexts(3, tArr);
 
     myPic.paint();
     printf("%c\n", getch());
