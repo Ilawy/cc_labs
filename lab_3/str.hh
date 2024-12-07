@@ -32,7 +32,7 @@ namespace strutil
         dest[ssize + dsize] = '\0';
     }
 
-    void cpyat(char target[], int at, char source[])
+    void cpyat(char target[], int at, const char source[])
     {
         int i = 0;
         while (source[i] != '\0')
@@ -117,9 +117,10 @@ class String
 private:
     friend std::ostream &operator<<(std::ostream &o, String t);
 
-    static String from(char str[], int size)
+    static String &from(char str[], int size)
     {
         String *result = new String;
+        delete [] result->pointer;
         result->size = size;
         result->pointer = new char[size];
         strutil::strcpy(result->pointer, str);
@@ -136,10 +137,10 @@ public:
         this->pointer[0] = '\0';
     }
 
-    String(char c[])
+    String(const char c[])
     {
         this->size = strutil::length(c);
-        this->pointer = new char[size - 1];
+        this->pointer = new char[size];
         strutil::strcpy(this->pointer, c);
     }
 
@@ -153,6 +154,7 @@ public:
 
     ~String()
     {
+        // cout << "FREEME " << this->pointer << endl;
         delete [] this->pointer;
     }
 
@@ -173,18 +175,29 @@ public:
         //
         return *final;
     }
+    String &operator +(char right[]){
+        return this->operator+(String::from(right, strutil::length(right)));
+    }
     String &operator +(int right_int){
         // https://stackoverflow.com/a/8257728
-        int right_size = (int)((ceil(log10(right_int))+1)*sizeof(char));
+        int right_size = (int)((ceil(log10(right_int)))*sizeof(char));
         char *right_pointer = new char[right_size];
         sprintf(right_pointer, "%d", right_int);
         String right_string = String::from(right_pointer, right_size);
         return this->operator+(right_string);
     }
+    friend String &operator+(int left_int, String &right_string){
+        int left_size = (int)((ceil(log10(left_int)))*sizeof(char));
+        char *left_pointer = new char[left_size];
+        sprintf(left_pointer, "%d", left_int);
+        // left_pointer[left_size-1] = '\0';
+        String left_string = String::from(left_pointer, left_size);
+        return left_string.operator+(right_string);
+    }
 
 
 
-    void operator+=(char right[])
+    void operator+=(const char right[])
     {
         char *old = this->pointer;
         int new_size = this->size + strutil::length(right);
