@@ -83,10 +83,12 @@ public:
         outtextxy(this->position.getX(), this->position.getY(), this->value->str());
         setcolor(WHITE);
     }
-    Point& getXY(){
+    Point &getXY()
+    {
         return this->position;
     }
-    void setXY(int x, int y){
+    void setXY(int x, int y)
+    {
         this->position = Point(x, y);
     }
 
@@ -142,7 +144,6 @@ void click_handler(int x, int y)
     cout << x << ", " << y << endl;
 }
 
-
 int main()
 {
     int gd = DETECT, gm;
@@ -157,33 +158,42 @@ int main()
     // t1->setFontSize(5);
     // t2->setFontSize(5);
 
+    // tl
     Circle *c1 = new Circle(30, 30, 10);
-    Circle *c2 = new Circle(getmaxx() - 60, 30, 10);
-    String* s1 = new String("Press any key to write a very long line of text");
+    // tr
+    Circle *c2 = new Circle(getmaxx() - 30, 30, 10);
+    // bl
+    Circle *c3 = new Circle(30, getmaxy() - 30, 10);
+    // br
+    Circle *c4 = new Circle(getmaxx() - 30, getmaxy() - 30, 10);
+
+    String *s1 = new String("Press any key to write a very long line of text");
     Text *t1 = new Text(s1, 40, 60, RED);
-    t1->setFontSize(3);
+    t1->setFontSize(2);
 
     myPic.addShape(c1);
     myPic.addShape(c2);
+    myPic.addShape(c3);
+    myPic.addShape(c4);
     myPic.addShape(t1);
     int count = 0;
     myPic.paint();
     while (1)
-    {   
+    {
         char keypress = getch();
         if (keypress == '\0' || keypress == 27)
         {
             break;
         }
-            char r[24];
-            sprintf(r, "%c", keypress);
-            *s1 = String("KEY :: ") + r + " " + keypress;
-            count++;
-            Point xy = t1->getXY();
-            t1->setXY(xy.getX(), xy.getY());
-            cleardevice();
-            myPic.paint();
-            printf("%d\n", keypress);
+        char r[24];
+        sprintf(r, "%c", keypress);
+        *s1 = String("KEY :: ") + r + " " + keypress;
+        count++;
+        Point xy = t1->getXY();
+        t1->setXY(xy.getX(), xy.getY());
+        cleardevice();
+        myPic.paint();
+        printf("%d\n", keypress);
     }
 
     return 0;
