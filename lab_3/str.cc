@@ -35,5 +35,9 @@ int main()
     scanf("%[^\n]*c", name);
     int age = 24;
     cout << greeting + name + " " + mage + age << endl;
+    String countingString = "Hello ";
+    for (int i = 0; i < 100; i++){
+        cout << countingString + i << endl;
+    }
     return 0;
 }

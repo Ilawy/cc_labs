@@ -178,14 +178,17 @@ public:
     String &operator +(char right[]){
         return this->operator+(String::from(right, strutil::length(right)));
     }
+
     String &operator +(int right_int){
         // https://stackoverflow.com/a/8257728
-        int right_size = (int)((ceil(log10(right_int)))*sizeof(char));
+        int right_size = right_int == 0 ? 1 : (int)((ceil(log10(right_int)))*sizeof(char));
+        // cout << "CONCATTING " << right_int << " SIZE " << right_size << endl;
         char *right_pointer = new char[right_size];
         sprintf(right_pointer, "%d", right_int);
         String right_string = String::from(right_pointer, right_size);
         return this->operator+(right_string);
     }
+
     friend String &operator+(int left_int, String &right_string){
         int left_size = (int)((ceil(log10(left_int)))*sizeof(char));
         char *left_pointer = new char[left_size];
@@ -287,6 +290,10 @@ public:
 
     int length(){
         return this->size;
+    }
+
+    char *str(){
+        return this->pointer;
     }
 
     // String& slice(int start){

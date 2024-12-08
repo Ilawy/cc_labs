@@ -2,7 +2,7 @@
 
 using namespace std;
 
-enum StackError
+enum FlexStackError
 {
     StackIsFull,
     StackIsEmpty
@@ -16,10 +16,11 @@ enum StackError
     grow
         size += grower
         (realloc)
-    
+
     shrink
         size -= grower
         (realloc)
+
     push
         if top >= size (FULL)
             grow()
@@ -48,29 +49,34 @@ private:
     T *items;
     void grow()
     {
+        int old_size = this->size;
         this->size += this->grower;
-        cout << "GROW :: " << this->size << endl;
+        // cout << "GROW :: " << this->size << endl;
         T *new_ptr = new T[this->size];
 
-        for (int i = 0; i < this->size; i++)
+        for (int i = 0; i < old_size; i++)
         {
             new_ptr[i] = this->items[i];
         }
-        cout << "GROW :: " << this->size << endl;
+        // cout << "GROW :: " << this->size << endl;
         delete[] this->items;
         this->items = new_ptr;
     }
+    
     void shrink()
     {
+        // cout << "this->size(" << this->size << ")" << "this->grower(" << this->grower << ")" " = " << this->size - this->grower;
+        int old_size = this->size;
         this->size -= this->grower;
         T *new_ptr = new T[this->size];
-        for (int i = 0; i < this->size; i++)
+        for (int i = 0; i < old_size; i++)
         {
             new_ptr[i] = this->items[i];
         }
         delete[] this->items;
         this->items = new_ptr;
     }
+   
 
 public:
     FlexStack(int grower = 8)
@@ -85,7 +91,7 @@ public:
         this->size = original.size;
         this->top = original.top;
         this->items = new T[original.size];
-        for (int i = 0; i < original.size; i++)
+        for (int i = 0; i < original.top; i++)
         {
             this->items[i] = original.items[i];
         }
@@ -103,26 +109,42 @@ public:
             this->grow();
         }
         this->items[top++] = item;
-        cout << "PUSHED (" << item << ") AT (" <<  top-1 << ")\n";
+        // cout << "PUSHED (" << item << ") AT (" <<  top-1 << ")\n";
     }
+    // T &pop()
+    // {
+    //     if (this->top <= 0)
+    //         throw FlexStackError::StackIsEmpty;
+    //     cout << "TOP" << top << endl;
+    //     return this->items[--top];
+    //     // if (top % grower == 0 && this->size - this->grower > 0)
+    //     // {
+    //     //     this->shrink();
+    //     // }
+    //     // return value;
+    // }
     T &pop()
     {
         if (this->top <= 0)
-            throw StackError::StackIsEmpty;
-        if (top % grower == 0)
-        {
-            this->shrink();
-        }
-        cout << "POPPED (" << this->items[top - 1] << ") AT (" <<  top-1 << ")\n";
-        return this->items[--top];
+            throw FlexStackError::StackIsEmpty;
+
+        T &value = this->items[--top];
+
+        // if (top % grower == 0 && this->size - this->grower > 0)
+        // {
+        //     this->shrink();
+        // }
+
+        return value;
     }
 
     int getSize()
     {
-        return this->size;
+        return this->top;
     }
 
-    T* getItems(){
+    T *getItems()
+    {
         return this->items;
     }
 };

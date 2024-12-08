@@ -5,6 +5,8 @@
             "label": "C/C++: gcc build active file",
             "command": "/usr/bin/g++",
             "args": [
+                "-lSDL2",
+                "-lSDL_bgi",
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
