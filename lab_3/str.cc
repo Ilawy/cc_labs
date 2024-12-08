@@ -39,5 +39,6 @@ int main()
     for (int i = 0; i < 100; i++){
         cout << countingString + i << endl;
     }
+    cout << countingString << -90 << endl;
     return 0;
 }
