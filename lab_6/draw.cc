@@ -169,8 +169,7 @@ int main()
     int count = 0;
     myPic.paint();
     while (1)
-    {
-        
+    {   
         char keypress = getch();
         if (keypress == '\0' || keypress == 27)
         {
@@ -178,7 +177,7 @@ int main()
         }
             char r[24];
             sprintf(r, "%c", keypress);
-            *s1 = String("KEY :: ") + r + " ";
+            *s1 = String("KEY :: ") + r + " " + keypress;
             count++;
             Point xy = t1->getXY();
             t1->setXY(xy.getX(), xy.getY());
