@@ -110,6 +110,14 @@ public:
         }
         this->items[top++] = item;
     }
+    void push(T &&item)// rvalue
+    {
+        if (this->top >= this->size)
+        { // FULL
+            this->grow();
+        }
+        this->items[top++] = item;
+    }
     T &pop()
     {
         if (this->top <= 0)
