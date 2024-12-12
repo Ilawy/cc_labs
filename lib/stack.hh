@@ -41,6 +41,12 @@ public:
             throw StackError::StackIsFull;
         this->items[top++] = item;
     }
+    void push(T &&item)
+    {
+        if (this->top >= this->size)
+            throw StackError::StackIsFull;
+        this->items[top++] = item;
+    }
     T &pop()
     {
         if (this->top <= 0)
@@ -57,5 +63,10 @@ public:
         if (top == 0)
             throw StackError::StackIsEmpty;
         return this->items[idx];
+    }
+
+    int getSize()
+    {
+        return this->top;
     }
 };
