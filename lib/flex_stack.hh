@@ -4,8 +4,8 @@ using namespace std;
 
 enum FlexStackError
 {
-    StackIsFull,
-    StackIsEmpty
+    StackIsEmpty,
+    AccessOutOfBounds
 };
 
 /*
@@ -109,20 +109,7 @@ public:
             this->grow();
         }
         this->items[top++] = item;
-        // cout << "PUSHED (" << item << ") AT (" <<  top-1 << ")\n";
     }
-    // T &pop()
-    // {
-    //     if (this->top <= 0)
-    //         throw FlexStackError::StackIsEmpty;
-    //     cout << "TOP" << top << endl;
-    //     return this->items[--top];
-    //     // if (top % grower == 0 && this->size - this->grower > 0)
-    //     // {
-    //     //     this->shrink();
-    //     // }
-    //     // return value;
-    // }
     T &pop()
     {
         if (this->top <= 0)
@@ -146,5 +133,14 @@ public:
     T *getItems()
     {
         return this->items;
+    }
+
+    T &operator[](int idx)
+    {
+        if (idx >= this->top || idx < 0){
+            throw FlexStackError::AccessOutOfBounds;
+        }
+        if(top == 0)throw FlexStackError::StackIsEmpty;
+        return this->items[idx];
     }
 };
